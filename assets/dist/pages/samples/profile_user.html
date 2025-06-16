@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profil User</title>
+  <link rel="stylesheet" href="../../assets/vendors/feather/feather.css" />
+  <link rel="stylesheet" href="../../assets/vendors/ti-icons/css/themify-icons.css" />
+  <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+  <style>
+    .profile-container {
+      display: flex;
+      gap: 30px;
+      margin: 50px auto;
+      max-width: 900px;
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+    .profile-left {
+      flex: 1;
+      text-align: center;
+    }
+    .profile-left img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    .profile-right {
+      flex: 2;
+    }
+    .profile-right ul {
+      list-style: none;
+      padding: 0;
+    }
+    .profile-right li {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .profile-right strong {
+      display: inline-block;
+      width: 180px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="profile-container">
+          <div class="profile-left">
+            <img id="profilePhoto" src="../../assets/images/faces/face1.jpg" alt="Foto Profil">
+            <h4 id="namaLengkap">Nama Pengguna</h4>
+            <p>Selamat datang!</p>
+          </div>
+          <div class="profile-right">
+            <h3>Detail Profil</h3>
+            <ul id="profilList"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS BUNDLE -->
+  <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+  <script src="../../assets/js/off-canvas.js"></script>
+  <script src="../../assets/js/template.js"></script>
+  <script src="../../assets/js/settings.js"></script>
+  <script src="../../assets/js/todolist.js"></script>
+
+  <script>
+    // Dummy data kalau localStorage masih kosong
+    if (!localStorage.getItem("userData")) {
+      const dummyUser = {
+        nama: "Astrid",
+        nik: "1234567890123456",
+        tempatLahir: "Bandung",
+        tanggalLahir: "2000-01-01",
+        jenisKelamin: "Perempuan",
+        alamat: "Jl. Merdeka No. 123",
+        rtrw: "001/002",
+        desa: "Cicadas",
+        kecamatan: "Cibeunying",
+        kabupaten: "Bandung",
+        telepon: "081234567890",
+        username: "astrid_01"
+      };
+      localStorage.setItem("userData", JSON.stringify(dummyUser));
+    }
+
+    // Ambil dan tampilkan data user
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData) {
+      document.getElementById("namaLengkap").textContent = userData.nama;
+
+      const profilList = document.getElementById("profilList");
+      profilList.innerHTML = `
+        <li><strong>Nama:</strong> ${userData.nama}</li>
+        <li><strong>NIK:</strong> ${userData.nik}</li>
+        <li><strong>Tempat/Tanggal Lahir:</strong> ${userData.tempatLahir}, ${userData.tanggalLahir}</li>
+        <li><strong>Jenis Kelamin:</strong> ${userData.jenisKelamin}</li>
+        <li><strong>Alamat:</strong> ${userData.alamat}</li>
+        <li><strong>RT/RW:</strong> ${userData.rtrw}</li>
+        <li><strong>Desa/Kelurahan:</strong> ${userData.desa}</li>
+        <li><strong>Kecamatan:</strong> ${userData.kecamatan}</li>
+        <li><strong>Kabupaten/Kota:</strong> ${userData.kabupaten}</li>
+        <li><strong>Telepon:</strong> ${userData.telepon}</li>
+        <li><strong>Username:</strong> ${userData.username}</li>
+      `;
+    } else {
+      document.body.innerHTML = "<h3 style='text-align:center'>Tidak ada data user ditemukan.</h3>";
+    }
+  </script>
+</body>
+</html>

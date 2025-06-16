@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profil Admin</title>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <style>
+    .container {
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Profil Admin</h2>
+    <ul id="adminProfile" class="list-group"></ul>
+  </div>
+
+  <script>
+    const adminData = {
+      nama: "Admin Wahyu",
+      username: "admin123",
+      email: "admin@contoh.com",
+      nohp: "081234567890",
+      jabatan: "Super Admin"
+    };
+    localStorage.setItem("adminData", JSON.stringify(adminData));
+  </script>
+
+  <script>
+    const admin = JSON.parse(localStorage.getItem("adminData"));
+    if (admin) {
+      document.getElementById("adminProfile").innerHTML = `
+        <li class="list-group-item"><strong>Nama:</strong> ${admin.nama}</li>
+        <li class="list-group-item"><strong>Username:</strong> ${admin.username}</li>
+        <li class="list-group-item"><strong>Email:</strong> ${admin.email}</li>
+        <li class="list-group-item"><strong>No HP:</strong> ${admin.nohp}</li>
+        <li class="list-group-item"><strong>Jabatan:</strong> ${admin.jabatan}</li>
+      `;
+    } else {
+      document.body.innerHTML = "<h3>Data admin tidak ditemukan.</h3>";
+    }
+  </script>
+</body>
+</html>
